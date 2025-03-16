@@ -1,0 +1,85 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+// 加载 local.properties
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+android {
+    namespace = "cn.darrenyou.flutternow"
+    compileSdk = localProperties.getProperty('flutter.compileSdkVersion').toInteger()
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "cn.darrenyou.flutternow"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = localProperties.getProperty('flutter.minSdkVersion').toInteger()
+        targetSdk = localProperties.getProperty('flutter.targetSdkVersion').toInteger()
+        versionCode = localProperties.getProperty('flutter.versionCode')
+        versionName = localProperties.getProperty('flutter.versionName')
+
+        multiDexEnabled true
+        manifestPlaceholders = [
+            qqappid: "102626602",
+            GETUI_APPID: "qOHIWOKeBqAUU12bPLxG74",
+            GT_INSTALL_CHANNEL: "",
+        ]
+    }
+
+    // 签名配置
+    // signingConfigs {
+    //     release {
+    //         storeFile file('keystore/youloft')
+    //         storePassword 'killers9Y'
+    //         keyAlias 'youloft'
+    //         keyPassword 'killers9Y'
+    //         v2SigningEnabled true
+    //     }
+    // }
+
+    // 编译配置
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ndk {
+                abiFilters 'arm64-v8a'
+            }
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+// 三方依赖
+dependencies {
+    implementation 'top.canyie.pine:core:0.3.0'
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/launch_back_color" />
+
+    <!-- You can insert your own image assets here -->
+    <!-- 定义启动页面布局，Android 12 API 31配置方式不一样
+    https://developer.android.google.cn/develop/ui/views/launch/splash-screen?hl=zh-cn
+     -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
+    </item>
+    <item android:bottom="40dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@mipmap/img_launch_slogan" />
+    </item>
+</layer-list>

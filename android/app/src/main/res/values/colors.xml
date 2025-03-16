@@ -1,0 +1,4 @@
+<!-- 启动界面背景色 -->
+<resources>
+    <color name="launch_back_color">#000000 </color>
+</resources>

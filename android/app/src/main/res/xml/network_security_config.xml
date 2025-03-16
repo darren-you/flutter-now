@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+<!-- 允许应用程序使用明文流量（HTTP） -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+        <!-- 信任系统预装的证书，允许覆盖证书固定设置 -->
+            <certificates
+                overridePins="true"
+                src="system" />
+                <!-- 信任用户预装的证书，允许覆盖证书固定设置 -->
+            <certificates
+                overridePins="true"
+                src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
