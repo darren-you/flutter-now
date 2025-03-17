@@ -9,6 +9,7 @@ import 'package:flutternow/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initBase();
+  await initApp();
 
   runApp(
     const ProviderScope(

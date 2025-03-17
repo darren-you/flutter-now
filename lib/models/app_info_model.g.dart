@@ -9,7 +9,7 @@ part of 'app_info_model.dart';
 _$AppInfoModelImpl _$$AppInfoModelImplFromJson(Map<String, dynamic> json) =>
     _$AppInfoModelImpl(
       packageName: json['packageName'] as String? ?? '',
-      version: json['version'] as String? ?? '',
+      appVersion: json['appVersion'] as String? ?? '',
       deviceId: json['deviceId'] as String? ?? '',
       deviceModel: json['deviceModel'] as String? ?? '',
       systemVersion: json['systemVersion'] as String? ?? '',
@@ -19,7 +19,7 @@ _$AppInfoModelImpl _$$AppInfoModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$AppInfoModelImplToJson(_$AppInfoModelImpl instance) =>
     <String, dynamic>{
       'packageName': instance.packageName,
-      'version': instance.version,
+      'appVersion': instance.appVersion,
       'deviceId': instance.deviceId,
       'deviceModel': instance.deviceModel,
       'systemVersion': instance.systemVersion,

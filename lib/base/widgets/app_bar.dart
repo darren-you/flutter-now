@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutternow/app.dart';
+import 'package:flutternow/extensions/fontweight_ext.dart';
 import 'package:flutternow/theme.dart';
 
 import 'app_bar_back_button.dart';

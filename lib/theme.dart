@@ -6,7 +6,7 @@ import 'package:flutternow/base/base.dart';
 /// 设置App状态栏、导航栏颜色
 const kSystemUiOverlayStyle = SystemUiOverlayStyle(
   statusBarColor: Color(0x00000000),
-  statusBarBrightness: Brightness.dark,
+  statusBarBrightness: Brightness.light,
   statusBarIconBrightness: Brightness.light,
   // systemNavigationBarColor: Colors.white,
   systemNavigationBarColor: Colors.transparent,
@@ -152,16 +152,16 @@ final _appStyles = AppStyles(
 
 /// 扩展定义AppColors
 const _appColors = AppColors(
-  primary: Color(0xFFFF0062),
+  primary: Color.fromARGB(255, 40, 171, 241),
   secondary: Color(0xFFEA6900),
   secondary1: Color(0xFF5CF2C5),
-  appBar: Color(0xFF000000),
-  mainBackground: Color(0xFF000000),
+  appBar: Color(0xFFFFFFFF),
+  mainBackground: Color(0xFFFFFFFF),
   mainBackgroundContrastingColor: Color(0xFF212121),
   cardBackground: Color(0xFF161616),
   divider: Color(0xFF393939),
-  text1: Color(0xFFFFFFFF),
-  text2: Color(0xFF717171),
+  text1: Color(0xFF333333),
+  text2: Color.fromARGB(255, 97, 97, 97),
 );
 
 /// 设置BuildContext扩展方法
@@ -227,9 +227,9 @@ Widget popFadeAnimation(
 /// 定义App主题样式
 final themeData = ThemeData(
   useMaterial3: true,
-  brightness: Brightness.dark,
+  brightness: Brightness.light,
   fontFamily: 'HarmonyOS Sans SC',
-  colorScheme: ColorScheme.dark(
+  colorScheme: ColorScheme.light(
     primary: _appColors.primary,
   ),
   primaryColor: _appColors.primary,
@@ -261,7 +261,7 @@ final themeData = ThemeData(
     ),
   ),
   cupertinoOverrideTheme: NoDefaultCupertinoThemeData(
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     primaryColor: _appColors.primary,
     textTheme: const CupertinoTextThemeData(
       textStyle: TextStyle(

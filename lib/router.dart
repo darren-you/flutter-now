@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutternow/managers/protocol_manager.dart';
+import 'package:flutternow/modules/home/home.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutternow/splash.dart';
+import 'package:flutternow/modules/protocols/ui/app_protocol_page.dart';
 
 part 'router.g.dart';
 
@@ -8,12 +12,31 @@ part 'router.g.dart';
 final routeObserver = RouteObserver<PageRoute>();
 
 /// 闪屏页
-@TypedGoRoute<SplashRoute>(path: '/splash')
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
+@TypedGoRoute<AppProtocolRoute>(path: '/appprotocol')
+class AppProtocolRoute extends GoRouteData {
+  const AppProtocolRoute();
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return const CupertinoPage(child: SplashPage());
+    return const CupertinoPage(child: AppProtocolPage());
+  }
+}
+
+/// 首页
+@TypedGoRoute<HomeRoute>(path: '/home')
+class HomeRoute extends GoRouteData {
+  const HomeRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return const CupertinoPage(child: HomePage());
+  }
+
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    if (!ProtocolManager.instance.agreedAppProtocolStatus()) {
+      return '/appprotocol';
+    }
+    return null;
   }
 }

@@ -21,7 +21,7 @@ AppInfoModel _$AppInfoModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AppInfoModel {
   String get packageName => throw _privateConstructorUsedError;
-  String get version => throw _privateConstructorUsedError;
+  String get appVersion => throw _privateConstructorUsedError;
   String get deviceId => throw _privateConstructorUsedError;
   String get deviceModel => throw _privateConstructorUsedError;
   String get systemVersion => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $AppInfoModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String packageName,
-      String version,
+      String appVersion,
       String deviceId,
       String deviceModel,
       String systemVersion,
@@ -68,7 +68,7 @@ class _$AppInfoModelCopyWithImpl<$Res, $Val extends AppInfoModel>
   @override
   $Res call({
     Object? packageName = null,
-    Object? version = null,
+    Object? appVersion = null,
     Object? deviceId = null,
     Object? deviceModel = null,
     Object? systemVersion = null,
@@ -79,9 +79,9 @@ class _$AppInfoModelCopyWithImpl<$Res, $Val extends AppInfoModel>
           ? _value.packageName
           : packageName // ignore: cast_nullable_to_non_nullable
               as String,
-      version: null == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
+      appVersion: null == appVersion
+          ? _value.appVersion
+          : appVersion // ignore: cast_nullable_to_non_nullable
               as String,
       deviceId: null == deviceId
           ? _value.deviceId
@@ -113,7 +113,7 @@ abstract class _$$AppInfoModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String packageName,
-      String version,
+      String appVersion,
       String deviceId,
       String deviceModel,
       String systemVersion,
@@ -134,7 +134,7 @@ class __$$AppInfoModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? packageName = null,
-    Object? version = null,
+    Object? appVersion = null,
     Object? deviceId = null,
     Object? deviceModel = null,
     Object? systemVersion = null,
@@ -145,9 +145,9 @@ class __$$AppInfoModelImplCopyWithImpl<$Res>
           ? _value.packageName
           : packageName // ignore: cast_nullable_to_non_nullable
               as String,
-      version: null == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
+      appVersion: null == appVersion
+          ? _value.appVersion
+          : appVersion // ignore: cast_nullable_to_non_nullable
               as String,
       deviceId: null == deviceId
           ? _value.deviceId
@@ -174,7 +174,7 @@ class __$$AppInfoModelImplCopyWithImpl<$Res>
 class _$AppInfoModelImpl implements _AppInfoModel {
   const _$AppInfoModelImpl(
       {this.packageName = '',
-      this.version = '',
+      this.appVersion = '',
       this.deviceId = '',
       this.deviceModel = '',
       this.systemVersion = '',
@@ -188,7 +188,7 @@ class _$AppInfoModelImpl implements _AppInfoModel {
   final String packageName;
   @override
   @JsonKey()
-  final String version;
+  final String appVersion;
   @override
   @JsonKey()
   final String deviceId;
@@ -204,7 +204,7 @@ class _$AppInfoModelImpl implements _AppInfoModel {
 
   @override
   String toString() {
-    return 'AppInfoModel(packageName: $packageName, version: $version, deviceId: $deviceId, deviceModel: $deviceModel, systemVersion: $systemVersion, firstLaunch: $firstLaunch)';
+    return 'AppInfoModel(packageName: $packageName, appVersion: $appVersion, deviceId: $deviceId, deviceModel: $deviceModel, systemVersion: $systemVersion, firstLaunch: $firstLaunch)';
   }
 
   @override
@@ -214,7 +214,8 @@ class _$AppInfoModelImpl implements _AppInfoModel {
             other is _$AppInfoModelImpl &&
             (identical(other.packageName, packageName) ||
                 other.packageName == packageName) &&
-            (identical(other.version, version) || other.version == version) &&
+            (identical(other.appVersion, appVersion) ||
+                other.appVersion == appVersion) &&
             (identical(other.deviceId, deviceId) ||
                 other.deviceId == deviceId) &&
             (identical(other.deviceModel, deviceModel) ||
@@ -227,8 +228,8 @@ class _$AppInfoModelImpl implements _AppInfoModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, packageName, version, deviceId,
-      deviceModel, systemVersion, firstLaunch);
+  int get hashCode => Object.hash(runtimeType, packageName, appVersion,
+      deviceId, deviceModel, systemVersion, firstLaunch);
 
   /// Create a copy of AppInfoModel
   /// with the given fields replaced by the non-null parameter values.
@@ -249,7 +250,7 @@ class _$AppInfoModelImpl implements _AppInfoModel {
 abstract class _AppInfoModel implements AppInfoModel {
   const factory _AppInfoModel(
       {final String packageName,
-      final String version,
+      final String appVersion,
       final String deviceId,
       final String deviceModel,
       final String systemVersion,
@@ -261,7 +262,7 @@ abstract class _AppInfoModel implements AppInfoModel {
   @override
   String get packageName;
   @override
-  String get version;
+  String get appVersion;
   @override
   String get deviceId;
   @override

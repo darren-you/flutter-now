@@ -3,21 +3,23 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutternow/modules/home/providers/counter_provider.dart';
 
-class HomeScreen extends HookConsumerWidget {
-  const HomeScreen({super.key});
+class HomePage extends HookConsumerWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final counter = ref.watch(counterProvider);
     final textController = useTextEditingController();
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Riverpod Demo'),
+        title: const Text(
+          'Riverpod Demo',
+          style: TextStyle(color: Colors.black),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () => ref.read(counterProvider.notifier).increment(),
+            onPressed: () => ref.read(counterProvider.notifier).reset(),
           ),
         ],
       ),

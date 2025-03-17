@@ -11,7 +11,7 @@ part 'router_provider.g.dart';
 GoRouter router(Ref ref) {
   return GoRouter(
     routes: $appRoutes,
-    initialLocation: '/splash',
+    initialLocation: '/home',
     observers: [
       // 注册 bot_toast 路由观察
       BotToastNavigatorObserver(),
