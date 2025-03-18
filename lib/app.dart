@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_system_proxy/flutter_system_proxy.dart';
 import 'package:flutternow/extensions/fontweight_ext.dart';
 import 'package:flutternow/managers/app_info_manager.dart';
-import 'package:flutternow/managers/local_storage_manager.dart';
+import 'package:flutternow/managers/preferences_manager.dart';
 import 'package:get_it/get_it.dart';
 
 export 'generated/assets.gen.dart';
@@ -26,7 +26,7 @@ bool isFontWeigthSupportW500 = false;
 /// 5、字重支持判断初始化
 Future<void> initBase() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  await LocalStorageManager.instance.init();
+  await PreferencesManager.instance.init();
   HttpOverrides.global = await HttpProxyOverride.createHttpProxy();
   getIt.registerSingleton<EventBus>(EventBus());
   FontWeightExt.getFontWeigthSupport();

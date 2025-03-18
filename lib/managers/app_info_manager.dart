@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutternow/managers/local_storage_manager.dart';
+import 'package:flutternow/constants/prefrences_keys.dart';
+import 'package:flutternow/managers/preferences_manager.dart';
 import 'package:flutternow/models/app_info_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:uuid/uuid.dart';
@@ -45,10 +46,11 @@ class AppInfoManager {
         if (id == null || id.isEmpty) {
           // 获取不到android id，生成一个存在本地
           final localDeviceId =
-              LocalStorageManager.instance.getString('deviceId') ?? '';
+              PreferencesManager.instance.getString(PreferencesKeys.deviceId) ??
+                  '';
           if (localDeviceId.isEmpty) {
             id = const Uuid().v1();
-            LocalStorageManager.instance.setString('deviceId', id);
+            PreferencesManager.instance.setString(PreferencesKeys.deviceId, id);
           } else {
             id = localDeviceId;
           }
@@ -60,10 +62,11 @@ class AppInfoManager {
         String? id = deviceInfo.identifierForVendor;
         if (id == null || id.isEmpty) {
           final localDeviceId =
-              LocalStorageManager.instance.getString('deviceId') ?? '';
+              PreferencesManager.instance.getString(PreferencesKeys.deviceId) ??
+                  '';
           if (localDeviceId.isEmpty) {
             id = const Uuid().v1();
-            LocalStorageManager.instance.setString('deviceId', id);
+            PreferencesManager.instance.setString(PreferencesKeys.deviceId, id);
           } else {
             id = localDeviceId;
           }

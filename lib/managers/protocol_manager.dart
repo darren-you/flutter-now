@@ -1,5 +1,5 @@
 import 'package:flutternow/constants/prefrences_keys.dart';
-import 'package:flutternow/managers/local_storage_manager.dart';
+import 'package:flutternow/managers/preferences_manager.dart';
 
 class ProtocolManager {
   ProtocolManager._();
@@ -14,7 +14,7 @@ class ProtocolManager {
   /// 获取同意App使用协议状态
   bool agreedAppProtocolStatus() {
     final agreedAppProtocolStatus =
-        LocalStorageManager.instance.getBool(PreferencesKeys.agreedAppProtocol);
+        PreferencesManager.instance.getBool(PreferencesKeys.agreedAppProtocol);
     if (agreedAppProtocolStatus == null || !agreedAppProtocolStatus) {
       return false;
     }
@@ -23,13 +23,13 @@ class ProtocolManager {
 
   /// 设置同意App使用协议
   void setAgreedAppProtocol() {
-    LocalStorageManager.instance
+    PreferencesManager.instance
         .setBool(PreferencesKeys.agreedAppProtocol, true);
   }
 
   /// 清空同意App使用协议状态
   void removeAgreedAppProtocol() {
-    LocalStorageManager.instance
+    PreferencesManager.instance
         .setBool(PreferencesKeys.agreedAppProtocol, null);
   }
 }

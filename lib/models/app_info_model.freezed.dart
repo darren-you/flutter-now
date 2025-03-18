@@ -20,11 +20,12 @@ AppInfoModel _$AppInfoModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppInfoModel {
-  String get packageName => throw _privateConstructorUsedError;
-  String get appVersion => throw _privateConstructorUsedError;
-  String get deviceId => throw _privateConstructorUsedError;
-  String get deviceModel => throw _privateConstructorUsedError;
-  String get systemVersion => throw _privateConstructorUsedError;
+  String get packageName => throw _privateConstructorUsedError; // 包名
+  String get appVersion => throw _privateConstructorUsedError; // App版本号
+  String get deviceId => throw _privateConstructorUsedError; // 设备唯一标识
+  String get deviceModel =>
+      throw _privateConstructorUsedError; // 设备平台: Android、iOS...
+  String get systemVersion => throw _privateConstructorUsedError; // 系统版本
   bool get firstLaunch => throw _privateConstructorUsedError;
 
   /// Serializes this AppInfoModel to a JSON map.
@@ -186,18 +187,23 @@ class _$AppInfoModelImpl implements _AppInfoModel {
   @override
   @JsonKey()
   final String packageName;
+// 包名
   @override
   @JsonKey()
   final String appVersion;
+// App版本号
   @override
   @JsonKey()
   final String deviceId;
+// 设备唯一标识
   @override
   @JsonKey()
   final String deviceModel;
+// 设备平台: Android、iOS...
   @override
   @JsonKey()
   final String systemVersion;
+// 系统版本
   @override
   @JsonKey()
   final bool firstLaunch;
@@ -260,15 +266,15 @@ abstract class _AppInfoModel implements AppInfoModel {
       _$AppInfoModelImpl.fromJson;
 
   @override
-  String get packageName;
+  String get packageName; // 包名
   @override
-  String get appVersion;
+  String get appVersion; // App版本号
   @override
-  String get deviceId;
+  String get deviceId; // 设备唯一标识
   @override
-  String get deviceModel;
+  String get deviceModel; // 设备平台: Android、iOS...
   @override
-  String get systemVersion;
+  String get systemVersion; // 系统版本
   @override
   bool get firstLaunch;
 

@@ -4,14 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// 本地轻量存储
 /// 基于shared_preferences
-class LocalStorageManager {
+class PreferencesManager {
   static final String _tag = 'LocalStorageManager';
-  LocalStorageManager._();
+  PreferencesManager._();
 
-  static LocalStorageManager? _instance;
+  static PreferencesManager? _instance;
 
-  static LocalStorageManager get instance {
-    _instance ??= LocalStorageManager._();
+  static PreferencesManager get instance {
+    _instance ??= PreferencesManager._();
     return _instance!;
   }
 

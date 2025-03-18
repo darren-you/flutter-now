@@ -72,6 +72,9 @@ dependencies:
   # 录音
   record: ^5.2.1
 
+  # 加密
+  crypto: 3.0.6
+
 
 dev_dependencies:
   flutter_test:

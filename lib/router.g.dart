@@ -8,7 +8,7 @@ part of 'router.dart';
 
 List<RouteBase> get $appRoutes => [
       $appProtocolRoute,
-      $homeRoute,
+      $mainRoute,
     ];
 
 RouteBase get $appProtocolRoute => GoRouteData.$route(
@@ -34,16 +34,16 @@ extension $AppProtocolRouteExtension on AppProtocolRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $homeRoute => GoRouteData.$route(
-      path: '/home',
-      factory: $HomeRouteExtension._fromState,
+RouteBase get $mainRoute => GoRouteData.$route(
+      path: '/main',
+      factory: $MainRouteExtension._fromState,
     );
 
-extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
+extension $MainRouteExtension on MainRoute {
+  static MainRoute _fromState(GoRouterState state) => const MainRoute();
 
   String get location => GoRouteData.$location(
-        '/home',
+        '/main',
       );
 
   void go(BuildContext context) => context.go(location);

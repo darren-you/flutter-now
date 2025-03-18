@@ -1,5 +1,5 @@
 import 'package:flutternow/constants/prefrences_keys.dart';
-import 'package:flutternow/managers/local_storage_manager.dart';
+import 'package:flutternow/managers/preferences_manager.dart';
 
 class FirstLaunchManager {
   FirstLaunchManager._();
@@ -14,9 +14,9 @@ class FirstLaunchManager {
   /// 设定App首次启动
   void setAppFirstLaunch() {
     final firstLaunchTime =
-        LocalStorageManager.instance.getString(PreferencesKeys.firstLaunchTime);
+        PreferencesManager.instance.getString(PreferencesKeys.firstLaunchTime);
     if (firstLaunchTime == null || firstLaunchTime.isEmpty) {
-      LocalStorageManager.instance
+      PreferencesManager.instance
           .setString(PreferencesKeys.firstLaunchTime, '${DateTime.now()}');
     }
   }
@@ -24,7 +24,7 @@ class FirstLaunchManager {
   /// 是否为首次启动
   bool isFirstTimeLaunch() {
     final firstLaunchTime =
-        LocalStorageManager.instance.getString(PreferencesKeys.firstLaunchTime);
+        PreferencesManager.instance.getString(PreferencesKeys.firstLaunchTime);
     if (firstLaunchTime == null || firstLaunchTime.isEmpty) {
       return true;
     }
@@ -33,13 +33,13 @@ class FirstLaunchManager {
 
   /// 首次启动时间
   String? getFirstLaunchTime() {
-    return LocalStorageManager.instance
+    return PreferencesManager.instance
         .getString(PreferencesKeys.firstLaunchTime);
   }
 
   /// 清空首次启动
   void restFirstLaunchTime() {
-    LocalStorageManager.instance
+    PreferencesManager.instance
         .setString(PreferencesKeys.firstLaunchTime, null);
   }
 }
