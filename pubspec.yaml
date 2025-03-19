@@ -75,6 +75,12 @@ dependencies:
   # 加密
   crypto: 3.0.6
 
+  # svg支持
+  flutter_svg: ^2.0.17
+
+  # 图片扩展
+  extended_image: 9.1.0
+
 
 dev_dependencies:
   flutter_test:
@@ -105,8 +111,10 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/videos/
+    
     - assets/lotties/
+    - assets/videos/
+    - assets/svg/
 
   fonts:
     - family: HarmonyOS Sans SC

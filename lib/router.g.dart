@@ -35,7 +35,7 @@ extension $AppProtocolRouteExtension on AppProtocolRoute {
 }
 
 RouteBase get $mainRoute => GoRouteData.$route(
-      path: '/main',
+      path: '/home',
       factory: $MainRouteExtension._fromState,
     );
 
@@ -43,7 +43,7 @@ extension $MainRouteExtension on MainRoute {
   static MainRoute _fromState(GoRouterState state) => const MainRoute();
 
   String get location => GoRouteData.$location(
-        '/main',
+        '/home',
       );
 
   void go(BuildContext context) => context.go(location);

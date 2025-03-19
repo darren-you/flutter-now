@@ -12,6 +12,7 @@ class AppProtocolPage extends HookConsumerWidget {
 
   // 不同意协议
   void _notAgree() {
+    ProtocolManager.instance.removeAgreedAppProtocol();
     exit(1);
   }
 

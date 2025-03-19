@@ -220,6 +220,19 @@ class $AssetsLottiesGen {
   List<String> get values => [loading];
 }
 
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/icon_barcode.svg
+  String get iconBarcode => 'assets/svg/icon_barcode.svg';
+
+  /// File path: assets/svg/icon_right.svg
+  String get iconRight => 'assets/svg/icon_right.svg';
+
+  /// List of all assets
+  List<String> get values => [iconBarcode, iconRight];
+}
+
 class $AssetsVideosGen {
   const $AssetsVideosGen();
 
@@ -241,6 +254,7 @@ class Assets {
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottiesGen lotties = $AssetsLottiesGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsVideosGen videos = $AssetsVideosGen();
 }
 
