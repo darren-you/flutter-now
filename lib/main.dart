@@ -27,7 +27,7 @@ class MainApp extends ConsumerWidget {
     final botToastBuilder = BotToastInit();
 
     return MaterialApp.router(
-      title: 'Pine',
+      title: 'Flutter Now',
       routerConfig: router,
       theme: themeData,
       darkTheme: themeData,
