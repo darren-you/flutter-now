@@ -34,7 +34,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/login/visitor',
+          '/api/user/login/visitor',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -67,7 +67,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/code',
+          '/api/user/code',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -100,7 +100,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/login/code',
+          '/api/user/login/code',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -140,7 +140,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/login/tl',
+          '/api/user/login/tl',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -179,7 +179,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/login/phone',
+          '/api/user/login/phone',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -212,7 +212,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/del',
+          '/api/user/del',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -239,7 +239,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/app/user/detail',
+          '/api/user/detail',
           queryParameters: queryParameters,
           data: _data,
         )
