@@ -10,6 +10,7 @@ import 'package:flutternow/constants/app_define.dart';
 import 'package:flutternow/constants/prefrences_keys.dart';
 import 'package:flutternow/extensions/fontweight_ext.dart';
 import 'package:flutternow/managers/app_info_manager.dart';
+import 'package:flutternow/managers/first_launch_manager.dart';
 import 'package:flutternow/managers/preferences_manager.dart';
 import 'package:flutternow/network/net_log_interceptor.dart';
 import 'package:flutternow/network/request_interceptor.dart';
@@ -19,7 +20,7 @@ import 'network/api_client.dart';
 
 export 'generated/assets.gen.dart';
 
-final _logName = 'app.dart';
+final _logName = 'app';
 
 /// get_it 依赖注入框架初始化
 final getIt = GetIt.instance;
@@ -38,7 +39,7 @@ Future<void> initBase() async {
   HttpOverrides.global = await HttpProxyOverride.createHttpProxy();
   getIt.registerSingleton<EventBus>(EventBus());
   FontWeightExt.getFontWeigthSupport();
-  log('initBase✅ 初始化基础框架完成', name: _logName);
+  log('initBase✅ 初始化基础框架完成 time: ${DateTime.now()}', name: _logName);
 }
 
 /// 初始化App框架，同意协议后
@@ -54,15 +55,12 @@ Future<void> initApp() async {
       PreferencesManager.instance.getBool(PreferencesKeys.agreedAppProtocol) ??
           false;
   if (!agreedProtocol) {
+    log('未同意App协议⚠️ time: ${DateTime.now()}', name: _logName);
     return;
   }
 
-  final firstLaunchTime =
-      PreferencesManager.instance.getBool(PreferencesKeys.firstLaunchTime) ?? 0;
-  if (firstLaunchTime == 0) {
-    PreferencesManager.instance.setInt(
-        PreferencesKeys.firstLaunchTime, DateTime.now().millisecondsSinceEpoch);
-  }
+  // 设置首次启动时间
+  FirstLaunchManager.instance.setAppFirstLaunch();
 
   // 获取App信息
   await AppInfoManager.instance.init();
@@ -78,6 +76,8 @@ Future<void> initApp() async {
 
   // 单例注入
   getIt.registerSingleton<ApiClient>(apiClient);
+
+  log('initApp✅ App基础环境初始化完成time: ${DateTime.now()}', name: _logName);
 
   return;
 }

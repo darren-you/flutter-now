@@ -86,14 +86,14 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   # 模版代码生成
-  build_runner: ^2.4.0
+  build_runner:
   flutter_gen_runner:
 
   # 状态管理模板代码生成、静态检查
-  riverpod_generator: ^2.6.0
+  riverpod_generator:
   riverpod_lint:
 
-  # retrofit静态检查
+  # retrofit注解生成
   retrofit_generator:
 
   # Model相关
@@ -105,6 +105,7 @@ dev_dependencies:
 
   # 静态检查
   flutter_lints: ^5.0.0
+  custom_lint:
 
 flutter:
   uses-material-design: true

@@ -8,18 +8,14 @@ part of 'app_user_model.dart';
 
 _$AppUserModelImpl _$$AppUserModelImplFromJson(Map<String, dynamic> json) =>
     _$AppUserModelImpl(
-      id: json['id'] == null
-          ? ''
-          : const JsonAlwaysString().fromJson(json['id']),
-      token: json['token'] as String? ?? '',
-      name: json['name'] as String? ?? '',
+      accessToken: json['access_token'] as String? ?? '',
+      username: json['username'] as String? ?? '',
       avatar: json['avatar'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$AppUserModelImplToJson(_$AppUserModelImpl instance) =>
     <String, dynamic>{
-      'id': const JsonAlwaysString().toJson(instance.id),
-      'token': instance.token,
-      'name': instance.name,
+      'access_token': instance.accessToken,
+      'username': instance.username,
       'avatar': instance.avatar,
     };

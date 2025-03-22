@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutternow/app.dart';
 
 class AppBarBackButton extends StatelessWidget {
@@ -16,12 +18,22 @@ class AppBarBackButton extends StatelessWidget {
         onPressed: () => Navigator.of(context).maybePop(),
         minSize: 0,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Assets.images.icArrowDown.image(width: 32),
+        child: SvgPicture.asset(
+          Assets.svg.iconArrowdown,
+          width: 24,
+          height: 24,
+          colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
+        ),
       );
     }
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      child: Assets.images.icNavBack.image(width: 24, height: 24),
+      child: SvgPicture.asset(
+        Assets.svg.iconNavback,
+        width: 20,
+        height: 20,
+        colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
+      ),
       onPressed: () {
         Navigator.of(context).maybePop();
       },

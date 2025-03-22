@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -42,7 +43,7 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: SafeArea(
           bottom: false,
           child: Container(
-            height: 68,
+            height: 55,
             alignment: Alignment.center,
             child: NavigationToolbar(
               leading: leading ?? _buildLeading(context),
@@ -94,5 +95,5 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(68);
+  Size get preferredSize => const Size.fromHeight(55);
 }

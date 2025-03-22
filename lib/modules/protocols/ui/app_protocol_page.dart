@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutternow/managers/first_launch_manager.dart';
+import 'package:flutternow/app.dart';
 import 'package:flutternow/managers/protocol_manager.dart';
 import 'package:flutternow/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,10 +17,10 @@ class AppProtocolPage extends HookConsumerWidget {
   }
 
   // 同意协议
-  void _agreeProtocol(BuildContext context) {
+  Future<void> _agreeProtocol(BuildContext context) async {
     ProtocolManager.instance.setAgreedAppProtocol();
-    FirstLaunchManager.instance.setAppFirstLaunch();
-    MainRoute().go(context);
+    await initApp();
+    if (context.mounted) MainRoute().go(context);
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutternow/app.dart';
 import 'package:flutternow/base/widgets/network_image_view.dart';
+import 'package:flutternow/providers/app_user_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MineExamplePage extends ConsumerWidget {
@@ -12,6 +13,8 @@ class MineExamplePage extends ConsumerWidget {
     final mediaQueryData = MediaQuery.of(context);
     var statusBarHeight = mediaQueryData.padding.top;
     var tabBarHeight = mediaQueryData.padding.bottom;
+
+    final appUserNotifier = ref.watch(appUserProvider);
 
     return Scaffold(
       backgroundColor: Colors.grey.withValues(alpha: 0.4),
@@ -38,7 +41,9 @@ class MineExamplePage extends ConsumerWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8)),
                           child: NetworkImageView(
-                            url: 'https://darrenyou.cn/static/images/my.jpeg',
+                            url: appUserNotifier != null
+                                ? appUserNotifier.avatar
+                                : '',
                             fit: BoxFit.cover,
                             width: 80,
                             height: 80,
@@ -52,7 +57,9 @@ class MineExamplePage extends ConsumerWidget {
                             children: [
                               const Padding(padding: EdgeInsets.only(top: 8)),
                               Text(
-                                'DarrenYou',
+                                appUserNotifier != null
+                                    ? appUserNotifier.username
+                                    : '',
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.w500,
@@ -60,7 +67,7 @@ class MineExamplePage extends ConsumerWidget {
                               ),
                               const Expanded(child: SizedBox()),
                               Text(
-                                'Weixin ID: OnlyDarrenYou',
+                                'Weixin ID: ${appUserNotifier != null ? appUserNotifier.username : ''}',
                                 style: TextStyle(
                                   fontSize: 17,
                                   color: Colors.grey,

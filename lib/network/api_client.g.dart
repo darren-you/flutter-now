@@ -22,19 +22,19 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AppUserModel> loginByGuest() async {
+  Future<BaseResponse<AppUserModel>> loginByGuest() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AppUserModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/api/user/login/visitor',
+          '/api/auth/visitor_login',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -44,9 +44,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserModel _value;
+    late BaseResponse<AppUserModel> _value;
     try {
-      _value = AppUserModel.fromJson(_result.data!);
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -55,12 +58,54 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getSMSCode({required String phone}) async {
+  Future<BaseResponse<AppUserModel>> loginByAccount({
+    required String username,
+    required String password,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'username': username,
+      'password': password,
+    };
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/auth/pwd_login',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<AppUserModel> _value;
+    try {
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<String>> getSMSCode({required String phone}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'phone': phone};
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<BaseResponse<String>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -76,13 +121,22 @@ class _ApiClient implements ApiClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<String> _value;
+    try {
+      _value = BaseResponse<String>.fromJson(
+        _result.data!,
+        (json) => json as String,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
   @override
-  Future<AppUserModel> loginByPhone({
+  Future<BaseResponse<AppUserModel>> loginByPhone({
     required String phone,
     required String code,
   }) async {
@@ -93,7 +147,7 @@ class _ApiClient implements ApiClient {
       'phone': phone,
       'code': code,
     };
-    final _options = _setStreamType<AppUserModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -110,9 +164,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserModel _value;
+    late BaseResponse<AppUserModel> _value;
     try {
-      _value = AppUserModel.fromJson(_result.data!);
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -121,7 +178,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<AppUserModel> loginByPlatform({
+  Future<BaseResponse<AppUserModel>> loginByPlatform({
     required int type,
     required String openId,
     required String avatar,
@@ -133,7 +190,7 @@ class _ApiClient implements ApiClient {
       'login_type': type,
       'open_id': openId,
     };
-    final _options = _setStreamType<AppUserModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -150,9 +207,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserModel _value;
+    late BaseResponse<AppUserModel> _value;
     try {
-      _value = AppUserModel.fromJson(_result.data!);
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -161,7 +221,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<AppUserModel> loginByPhoneVerify({
+  Future<BaseResponse<AppUserModel>> loginByPhoneVerify({
     required String token,
     required String gyuid,
   }) async {
@@ -172,7 +232,7 @@ class _ApiClient implements ApiClient {
       'token': token,
       'gyuid': gyuid,
     };
-    final _options = _setStreamType<AppUserModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -189,9 +249,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserModel _value;
+    late BaseResponse<AppUserModel> _value;
     try {
-      _value = AppUserModel.fromJson(_result.data!);
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -200,12 +263,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> deleteAccount() async {
+  Future<BaseResponse<String>> deleteAccount() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<BaseResponse<String>>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -221,18 +284,27 @@ class _ApiClient implements ApiClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<String> _value;
+    try {
+      _value = BaseResponse<String>.fromJson(
+        _result.data!,
+        (json) => json as String,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 
   @override
-  Future<AppUserModel> getCurrentUser() async {
+  Future<BaseResponse<AppUserModel>> getCurrentUser() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AppUserModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppUserModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -249,9 +321,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppUserModel _value;
+    late BaseResponse<AppUserModel> _value;
     try {
-      _value = AppUserModel.fromJson(_result.data!);
+      _value = BaseResponse<AppUserModel>.fromJson(
+        _result.data!,
+        (json) => AppUserModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -260,12 +335,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<AppVersionModel> getAppVersion() async {
+  Future<BaseResponse<AppVersionModel>> getAppVersion() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<AppVersionModel>(Options(
+    final _options = _setStreamType<BaseResponse<AppVersionModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -282,9 +357,12 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AppVersionModel _value;
+    late BaseResponse<AppVersionModel> _value;
     try {
-      _value = AppVersionModel.fromJson(_result.data!);
+      _value = BaseResponse<AppVersionModel>.fromJson(
+        _result.data!,
+        (json) => AppVersionModel.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -293,12 +371,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<dynamic> getAppConfig() async {
+  Future<BaseResponse<String>> getAppConfig() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(Options(
+    final _options = _setStreamType<BaseResponse<String>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -314,8 +392,17 @@ class _ApiClient implements ApiClient {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<String> _value;
+    try {
+      _value = BaseResponse<String>.fromJson(
+        _result.data!,
+        (json) => json as String,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 

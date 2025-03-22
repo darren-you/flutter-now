@@ -51,8 +51,9 @@ class NetLogInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (kDebugMode) {
       var log = '*** DioException ***:';
-      log += '\n${err.requestOptions.uri}';
-      log += '\n$err';
+      log += '\nmethod: ${err.requestOptions.method}';
+      log += '\nDioExceptionType: ${err.type}';
+      log += '\nerror: ${err.error}';
       if (err.response != null) {
         log += _printResponse(err.response!);
       }

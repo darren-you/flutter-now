@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutternow/app.dart';
 import 'package:flutternow/constants/prefrences_keys.dart';
+import 'package:flutternow/enums/enums.dart';
 import 'package:flutternow/eventbus/event_bus.dart';
 import 'package:flutternow/managers/preferences_manager.dart';
 import 'package:flutternow/models/app_info_model.dart';
@@ -64,23 +65,61 @@ class RequestInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    Map<String, dynamic> json = response.data;
+    // 处理响应为空的情况
+    if (response.data == null) {
+      handler.reject(
+        DioException(
+          requestOptions: response.requestOptions,
+          message: '服务器响应为空',
+          response: response,
+        ),
+        true,
+      );
+      return;
+    }
 
-    if (json["code"] == 200) {
-      response.data = json["data"]; // 只返回实际数据部分
+    // 处理响应数据结构错误的情况
+    if (response.data is! Map<String, dynamic>) {
+      handler.reject(
+        DioException(
+          requestOptions: response.requestOptions,
+          message: '服务器响应数据错误',
+          response: response,
+        ),
+        true,
+      );
+      return;
+    }
+
+    /// 业务数据为空
+    if (response.data['code'] == 200 && response.data['data'] == null) {
+      handler.reject(
+        DioException(
+          requestOptions: response.requestOptions,
+          message: '业务数据为空',
+          response: response,
+        ),
+        true,
+      );
+      return;
+    }
+
+    if (response.data["code"] == 200) {
       handler.next(response); // 继续传递响应
     } else {
       // 特殊处理 401 未授权错误
-      if (json["code"] == 401) {
+      if (response.data["code"] == 401) {
         // 发送 Token 过期事件
         getIt<EventBus>().fire(UserTokenExpired());
       }
+
       // 其他情况这转换为DioException
       handler.reject(
         DioException(
           requestOptions: response.requestOptions,
-          message: json['msg'],
           response: response,
+          error: CustomExceptionType.business,
+          message: response.data['msg'],
         ),
         true,
       );

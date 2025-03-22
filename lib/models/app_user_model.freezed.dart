@@ -20,10 +20,9 @@ AppUserModel _$AppUserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppUserModel {
-  @JsonAlwaysString()
-  String get id => throw _privateConstructorUsedError; // ID号
-  String get token => throw _privateConstructorUsedError; // 登陆Token
-  String get name => throw _privateConstructorUsedError; // 昵称
+  @JsonKey(name: 'access_token')
+  String get accessToken => throw _privateConstructorUsedError; // 登陆Token
+  String get username => throw _privateConstructorUsedError; // 昵称
   String get avatar => throw _privateConstructorUsedError;
 
   /// Serializes this AppUserModel to a JSON map.
@@ -43,9 +42,8 @@ abstract class $AppUserModelCopyWith<$Res> {
       _$AppUserModelCopyWithImpl<$Res, AppUserModel>;
   @useResult
   $Res call(
-      {@JsonAlwaysString() String id,
-      String token,
-      String name,
+      {@JsonKey(name: 'access_token') String accessToken,
+      String username,
       String avatar});
 }
 
@@ -64,23 +62,18 @@ class _$AppUserModelCopyWithImpl<$Res, $Val extends AppUserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? token = null,
-    Object? name = null,
+    Object? accessToken = null,
+    Object? username = null,
     Object? avatar = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       avatar: null == avatar
           ? _value.avatar
@@ -99,9 +92,8 @@ abstract class _$$AppUserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonAlwaysString() String id,
-      String token,
-      String name,
+      {@JsonKey(name: 'access_token') String accessToken,
+      String username,
       String avatar});
 }
 
@@ -118,23 +110,18 @@ class __$$AppUserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? token = null,
-    Object? name = null,
+    Object? accessToken = null,
+    Object? username = null,
     Object? avatar = null,
   }) {
     return _then(_$AppUserModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       avatar: null == avatar
           ? _value.avatar
@@ -148,26 +135,20 @@ class __$$AppUserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AppUserModelImpl implements _AppUserModel {
   const _$AppUserModelImpl(
-      {@JsonAlwaysString() this.id = '',
-      this.token = '',
-      this.name = '',
+      {@JsonKey(name: 'access_token') this.accessToken = '',
+      this.username = '',
       this.avatar = ''});
 
   factory _$AppUserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppUserModelImplFromJson(json);
 
   @override
-  @JsonKey()
-  @JsonAlwaysString()
-  final String id;
-// ID号
-  @override
-  @JsonKey()
-  final String token;
+  @JsonKey(name: 'access_token')
+  final String accessToken;
 // 登陆Token
   @override
   @JsonKey()
-  final String name;
+  final String username;
 // 昵称
   @override
   @JsonKey()
@@ -175,7 +156,7 @@ class _$AppUserModelImpl implements _AppUserModel {
 
   @override
   String toString() {
-    return 'AppUserModel(id: $id, token: $token, name: $name, avatar: $avatar)';
+    return 'AppUserModel(accessToken: $accessToken, username: $username, avatar: $avatar)';
   }
 
   @override
@@ -183,15 +164,16 @@ class _$AppUserModelImpl implements _AppUserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppUserModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, token, name, avatar);
+  int get hashCode => Object.hash(runtimeType, accessToken, username, avatar);
 
   /// Create a copy of AppUserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -211,21 +193,18 @@ class _$AppUserModelImpl implements _AppUserModel {
 
 abstract class _AppUserModel implements AppUserModel {
   const factory _AppUserModel(
-      {@JsonAlwaysString() final String id,
-      final String token,
-      final String name,
+      {@JsonKey(name: 'access_token') final String accessToken,
+      final String username,
       final String avatar}) = _$AppUserModelImpl;
 
   factory _AppUserModel.fromJson(Map<String, dynamic> json) =
       _$AppUserModelImpl.fromJson;
 
   @override
-  @JsonAlwaysString()
-  String get id; // ID号
+  @JsonKey(name: 'access_token')
+  String get accessToken; // 登陆Token
   @override
-  String get token; // 登陆Token
-  @override
-  String get name; // 昵称
+  String get username; // 昵称
   @override
   String get avatar;
 

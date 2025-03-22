@@ -26,7 +26,7 @@ AppUserModel? getUser() {
         return AppUserModel.fromJson(Map<String, dynamic>.from(jsonObj));
       }
     } catch (e) {
-      log('获取用户失败');
+      log('获取用户失败:$e time: ${DateTime.now()}', name: 'user');
     }
   }
   return null;
@@ -53,18 +53,18 @@ class AppUser extends _$AppUser {
   Future<void> refresh() async {
     if (state == null) return;
     try {
-      var user = await getIt<ApiClient>().getCurrentUser();
-      user = user.copyWith(token: state!.token);
+      var user = (await getIt<ApiClient>().getCurrentUser()).data!;
+      user = user.copyWith(accessToken: state!.accessToken);
       save(user);
       getIt<EventBus>().fire(UserUpdatedEvent());
     } catch (e) {
-      log('刷新用户信息错误:$e');
+      log('刷新用户信息错误:$e time: ${DateTime.now()}', name: 'user');
     }
   }
 
   void save(AppUserModel? newValue) {
     PreferencesManager.instance
-        .setString(PreferencesKeys.userLoginToken, newValue?.token);
+        .setString(PreferencesKeys.userLoginToken, newValue?.accessToken);
     PreferencesManager.instance.setString(PreferencesKeys.userCacheInfo,
         newValue == null ? null : jsonEncode(newValue.toJson()));
 

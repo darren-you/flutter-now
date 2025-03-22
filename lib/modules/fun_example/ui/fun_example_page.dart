@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutternow/app.dart';
 import 'package:flutternow/base/base.dart';
+import 'package:flutternow/managers/protocol_manager.dart';
 import 'package:flutternow/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,7 +17,6 @@ class FunExamplePage extends ConsumerWidget {
       appBar: MAppBar(
         backgroundColor: Colors.white.withValues(alpha: 0.8),
         title: '功能',
-        enabledBackdrop: true,
       ),
       backgroundColor: Colors.grey.withValues(alpha: 0.4),
       body: Container(
@@ -35,11 +35,15 @@ class FunExamplePage extends ConsumerWidget {
 
   List<Widget> _buildFunMenuList(BuildContext context) {
     return [
-      _menuItem('隐私协议', () {
-        AppProtocolRoute().go(context);
+      _menuItem('清除隐私协议状态', () {
+        ProtocolManager.instance.removeAgreedAppProtocol();
+        BotToast.showText(text: '清除成功✅');
       }),
       _menuItem('游客登陆', () {
         BotToast.showText(text: '待实现');
+      }),
+      _menuItem('账号登陆', () {
+        AccoutLoginRoute().push(context);
       }),
       _menuItem('验证码登陆', () {
         BotToast.showText(text: '待实现');
