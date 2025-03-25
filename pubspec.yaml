@@ -81,6 +81,14 @@ dependencies:
   # 图片扩展
   extended_image: 9.1.0
 
+  # 文件下载与缓存
+  flutter_cache_manager: ^3.4.1
+
+  # 页面滑动控制
+  visibility_detector: ^0.4.0+2
+
+  pull_to_refresh: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:

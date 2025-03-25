@@ -53,11 +53,11 @@ class CustomContainer extends HookWidget {
     final bgColorAnimation = useAnimation(
       ColorTween(
         begin: color == null
-            ? startColor?.withOpacity(1.0)
-            : color?.withOpacity(1.0),
+            ? startColor?.withValues(alpha: 1.0)
+            : color?.withValues(alpha: 1.0),
         end: color == null
-            ? endColor?.withOpacity(0.8)
-            : color?.withOpacity(0.8),
+            ? endColor?.withValues(alpha: 0.8)
+            : color?.withValues(alpha: 0.8),
       ).animate(
         CurvedAnimation(parent: animController, curve: Curves.decelerate),
       ),
@@ -65,8 +65,8 @@ class CustomContainer extends HookWidget {
 
     final foreColorAnimation = useAnimation(
       ColorTween(
-        begin: Colors.grey.withOpacity(0.0),
-        end: Colors.grey.withOpacity(0.3),
+        begin: Colors.grey.withValues(alpha: 0.0),
+        end: Colors.grey.withValues(alpha: 0.3),
       ).animate(
         CurvedAnimation(parent: animController, curve: Curves.decelerate),
       ),

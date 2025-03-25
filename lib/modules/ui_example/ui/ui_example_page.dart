@@ -10,10 +10,6 @@ class UiExamplePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaQueryData = MediaQuery.of(context);
-    var statusBarHeight = mediaQueryData.padding.top;
-    var tabBarHeight = mediaQueryData.padding.bottom;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: MAppBar(

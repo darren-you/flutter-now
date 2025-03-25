@@ -57,7 +57,7 @@ class RequestInterceptor extends Interceptor {
     final authToken =
         PreferencesManager.instance.getString(PreferencesKeys.userLoginToken);
     if (authToken != null) {
-      options.headers['X-Token'] = authToken;
+      options.headers['Authorization'] = 'Bearer $authToken';
     }
 
     handler.next(options);

@@ -311,7 +311,7 @@ class _ApiClient implements ApiClient {
     )
         .compose(
           _dio.options,
-          '/api/user/detail',
+          '/api/user/profile',
           queryParameters: queryParameters,
           data: _data,
         )

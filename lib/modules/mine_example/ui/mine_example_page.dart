@@ -12,8 +12,6 @@ class MineExamplePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaQueryData = MediaQuery.of(context);
     var statusBarHeight = mediaQueryData.padding.top;
-    var tabBarHeight = mediaQueryData.padding.bottom;
-
     final appUserNotifier = ref.watch(appUserProvider);
 
     return Scaffold(

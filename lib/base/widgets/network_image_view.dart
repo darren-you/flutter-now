@@ -75,7 +75,6 @@ class NetworkImageView extends StatelessWidget {
 
 class _NetworkImage extends StatelessWidget {
   const _NetworkImage({
-    super.key,
     required this.url,
     required this.scale,
     this.fit,
@@ -101,10 +100,12 @@ class _NetworkImage extends StatelessWidget {
     int? cacheHeight;
 
     if (width != null) {
-      cacheWidth = (width! * MediaQuery.devicePixelRatioOf(context) * scale).toInt();
+      cacheWidth =
+          (width! * MediaQuery.devicePixelRatioOf(context) * scale).toInt();
     }
     if (height != null) {
-      cacheHeight = (height! * MediaQuery.devicePixelRatioOf(context) * scale).toInt();
+      cacheHeight =
+          (height! * MediaQuery.devicePixelRatioOf(context) * scale).toInt();
     }
 
     ImageProvider<Object> imageProvider = ExtendedNetworkImageProvider(

@@ -54,7 +54,7 @@ abstract class ApiClient {
   Future<BaseResponse<String>> deleteAccount();
 
   /// 获取当前登录用户信息
-  @GET('/api/user/detail')
+  @GET('/api/user/profile')
   Future<BaseResponse<AppUserModel>> getCurrentUser();
 
   /// 获取app版本，检查有没有更新
