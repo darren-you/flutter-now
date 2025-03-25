@@ -8,8 +8,10 @@ part 'app_user_model.g.dart';
 class AppUserModel with _$AppUserModel {
   const factory AppUserModel({
     @JsonKey(name: 'access_token') @Default('') String accessToken, // 登陆Token
-    @Default('') String username, // 昵称
-    @Default('') String avatar, // 头像URL
+    @Default('') String username,
+    @Default('') String avatar,
+    @Default('') String phone,
+    @JsonKey(name: 'user_type') @Default('') String userType,
   }) = _AppUserModel;
 
   factory AppUserModel.fromJson(Map<String, dynamic> json) =>

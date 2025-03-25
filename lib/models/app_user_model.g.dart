@@ -11,6 +11,8 @@ _$AppUserModelImpl _$$AppUserModelImplFromJson(Map<String, dynamic> json) =>
       accessToken: json['access_token'] as String? ?? '',
       username: json['username'] as String? ?? '',
       avatar: json['avatar'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      userType: json['user_type'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$AppUserModelImplToJson(_$AppUserModelImpl instance) =>
@@ -18,4 +20,6 @@ Map<String, dynamic> _$$AppUserModelImplToJson(_$AppUserModelImpl instance) =>
       'access_token': instance.accessToken,
       'username': instance.username,
       'avatar': instance.avatar,
+      'phone': instance.phone,
+      'user_type': instance.userType,
     };
