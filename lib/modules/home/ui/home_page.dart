@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutternow/modules/fun_example/ui/fun_example_page.dart';
 import 'package:flutternow/modules/mine_example/ui/mine_example_page.dart';
 import 'package:flutternow/modules/ui_example/ui_example.dart';
@@ -25,6 +26,8 @@ class _MainPageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -41,7 +44,8 @@ class _MainPageState extends ConsumerState<HomePage> {
                 filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.6),
+                    // color: Colors.white.withValues(alpha: 0.6),
+                    color: Colors.amber.withValues(alpha: 0.6),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.1),
@@ -52,6 +56,7 @@ class _MainPageState extends ConsumerState<HomePage> {
                   ),
                   child: SafeArea(
                     top: false,
+                    // bottom: false,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

@@ -5,12 +5,12 @@ import 'package:flutternow/base/base.dart';
 
 /// 设置App状态栏、导航栏颜色
 const kSystemUiOverlayStyle = SystemUiOverlayStyle(
-  statusBarColor: Color(0x00000000),
-  statusBarBrightness: Brightness.light,
-  statusBarIconBrightness: Brightness.light,
-  // systemNavigationBarColor: Colors.white,
+  statusBarColor: Colors.transparent,
+  statusBarBrightness: Brightness.dark,
+  statusBarIconBrightness: Brightness.dark,
   systemNavigationBarColor: Colors.transparent,
-  systemNavigationBarDividerColor: Color(0x00000000),
+  systemNavigationBarDividerColor: Colors.transparent,
+  systemNavigationBarContrastEnforced: false,
 );
 
 /// 扩展Theme自定义AppColors
