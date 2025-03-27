@@ -2,11 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutternow/modules/fun_example/ui/fun_example_page.dart';
 import 'package:flutternow/modules/mine_example/ui/mine_example_page.dart';
 import 'package:flutternow/modules/ui_example/ui_example.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+const _navBarHeight = 56;
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -26,14 +27,26 @@ class _MainPageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    final mediaQueryData = MediaQuery.of(context);
+    final bottomBarHeight = mediaQueryData.padding.bottom + _navBarHeight;
 
     return Scaffold(
       body: Stack(
         children: [
-          IndexedStack(
-            index: _currentIndex,
-            children: _pages,
+          Positioned.fill(
+            child: MediaQuery(
+              data: mediaQueryData.copyWith(
+                padding: mediaQueryData.padding.copyWith(
+                  bottom: mediaQueryData.viewInsets.bottom > 0
+                      ? 0
+                      : bottomBarHeight,
+                ),
+              ),
+              child: IndexedStack(
+                index: _currentIndex,
+                children: _pages,
+              ),
+            ),
           ),
           Positioned(
             left: 0,
