@@ -57,8 +57,7 @@ class _MainPageState extends ConsumerState<HomePage> {
                 filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                 child: Container(
                   decoration: BoxDecoration(
-                    // color: Colors.white.withValues(alpha: 0.6),
-                    color: Colors.amber.withValues(alpha: 0.6),
+                    color: Colors.white.withValues(alpha: 0.6),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.1),

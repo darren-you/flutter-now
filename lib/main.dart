@@ -31,6 +31,10 @@ class MainApp extends ConsumerWidget {
       routerConfig: router,
       theme: themeData,
       darkTheme: themeData,
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        physics: const BouncingScrollPhysics(),
+        overscroll: true,
+      ),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
