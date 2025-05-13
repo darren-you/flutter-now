@@ -1,13 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutternow/base/base.dart';
+import 'package:flutternow/base/animate/spring_curve.dart';
 
 /// 设置App状态栏、导航栏颜色
-const kSystemUiOverlayStyle = SystemUiOverlayStyle(
+final kSystemUiOverlayStyle = SystemUiOverlayStyle(
   statusBarColor: Colors.transparent,
-  statusBarBrightness: Brightness.dark,
-  statusBarIconBrightness: Brightness.dark,
+  statusBarBrightness: Platform.isAndroid ? Brightness.dark : Brightness.light,
+  statusBarIconBrightness:
+      Platform.isAndroid ? Brightness.dark : Brightness.light,
   systemNavigationBarColor: Colors.transparent,
   systemNavigationBarDividerColor: Colors.transparent,
   systemNavigationBarContrastEnforced: false,
@@ -30,9 +33,9 @@ class AppColors extends ThemeExtension<AppColors> {
 
   final Color divider;
 
-  final Color text1;
+  final Color textMain;
 
-  final Color text2;
+  final Color textSecond;
 
   const AppColors({
     required this.primary,
@@ -43,8 +46,8 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.mainBackgroundContrastingColor,
     required this.cardBackground,
     required this.divider,
-    required this.text1,
-    required this.text2,
+    required this.textMain,
+    required this.textSecond,
   });
 
   @override
@@ -58,8 +61,8 @@ class AppColors extends ThemeExtension<AppColors> {
       mainBackgroundContrastingColor: mainBackgroundContrastingColor,
       cardBackground: cardBackground,
       divider: divider,
-      text1: text1,
-      text2: text2,
+      textMain: textMain,
+      textSecond: textSecond,
     );
   }
 
@@ -84,8 +87,8 @@ class AppColors extends ThemeExtension<AppColors> {
       cardBackground:
           Color.lerp(cardBackground, other.cardBackground, t) ?? cardBackground,
       divider: Color.lerp(divider, other.divider, t) ?? divider,
-      text1: Color.lerp(text1, other.text1, t) ?? text1,
-      text2: Color.lerp(text1, other.text2, t) ?? text2,
+      textMain: Color.lerp(textMain, other.textMain, t) ?? textMain,
+      textSecond: Color.lerp(textSecond, other.textSecond, t) ?? textSecond,
     );
   }
 }
@@ -156,12 +159,12 @@ const _appColors = AppColors(
   secondary: Color(0xFFEA6900),
   secondary1: Color(0xFF5CF2C5),
   appBar: Color(0xFFFFFFFF),
-  mainBackground: Color(0xFFFFFFFF),
+  mainBackground: Color(0xFFEDEDED),
   mainBackgroundContrastingColor: Color(0xFF212121),
   cardBackground: Color(0xFF161616),
   divider: Color(0xFF393939),
-  text1: Color(0xFF333333),
-  text2: Color.fromARGB(255, 97, 97, 97),
+  textMain: Color(0xFF333333),
+  textSecond: Color(0xFF878787),
 );
 
 /// 设置BuildContext扩展方法
@@ -249,13 +252,13 @@ final themeData = ThemeData(
   textTheme: TextTheme(
     // 大部分地方的文字颜色
     bodyMedium: TextStyle(
-      color: _appColors.text1,
+      color: _appColors.textMain,
       fontWeight: FontWeight.normal,
       letterSpacing: 0,
     ),
     // 大部分地方的文字颜色
     titleMedium: TextStyle(
-      color: _appColors.text1,
+      color: _appColors.textMain,
       fontWeight: FontWeight.normal,
       letterSpacing: 0,
     ),
@@ -277,6 +280,7 @@ final themeData = ThemeData(
   ),
   dividerColor: _appColors.divider,
   scaffoldBackgroundColor: _appColors.mainBackground,
+  // scaffoldBackgroundColor: Colors.amber,
   tabBarTheme: const TabBarTheme(
     dividerColor: Colors.transparent,
   ),

@@ -20,21 +20,24 @@ class $AssetsLottiesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
-  /// File path: assets/svg/icon_arrowdown.svg
-  String get iconArrowdown => 'assets/svg/icon_arrowdown.svg';
+  /// File path: assets/svg/icon_back.svg
+  String get iconBack => 'assets/svg/icon_back.svg';
 
   /// File path: assets/svg/icon_barcode.svg
   String get iconBarcode => 'assets/svg/icon_barcode.svg';
 
-  /// File path: assets/svg/icon_navback.svg
-  String get iconNavback => 'assets/svg/icon_navback.svg';
+  /// File path: assets/svg/icon_down.svg
+  String get iconDown => 'assets/svg/icon_down.svg';
 
   /// File path: assets/svg/icon_right.svg
   String get iconRight => 'assets/svg/icon_right.svg';
 
+  /// File path: assets/svg/icon_setting.svg
+  String get iconSetting => 'assets/svg/icon_setting.svg';
+
   /// List of all assets
   List<String> get values =>
-      [iconArrowdown, iconBarcode, iconNavback, iconRight];
+      [iconBack, iconBarcode, iconDown, iconRight, iconSetting];
 }
 
 class $AssetsVideosGen {

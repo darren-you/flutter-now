@@ -1,117 +1,140 @@
+import 'dart:io';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutternow/modules/fun_example/ui/fun_example_page.dart';
-import 'package:flutternow/modules/mine_example/ui/mine_example_page.dart';
-import 'package:flutternow/modules/ui_example/ui_example.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutternow/base/widgets/line_widget.dart';
+import 'package:flutternow/constants/app_define.dart';
+import 'package:flutternow/modules/fun/ui/fun_page.dart';
+import 'package:flutternow/modules/mine/ui/mine_page.dart';
+import 'package:flutternow/modules/ui/ui/ui_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-const _navBarHeight = 56;
+enum HomePageTab {
+  ui,
+  fun,
+  mine;
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  ConsumerState<HomePage> createState() => _MainPageState();
-}
-
-class _MainPageState extends ConsumerState<HomePage> {
-  final _pages = [
-    const UiExamplePage(),
-    const FunExamplePage(),
-    const MineExamplePage(),
-  ];
-
-  int _currentIndex = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    final mediaQueryData = MediaQuery.of(context);
-    final bottomBarHeight = mediaQueryData.padding.bottom + _navBarHeight;
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: MediaQuery(
-              data: mediaQueryData.copyWith(
-                padding: mediaQueryData.padding.copyWith(
-                  bottom: mediaQueryData.viewInsets.bottom > 0
-                      ? 0
-                      : bottomBarHeight,
-                ),
-              ),
-              child: IndexedStack(
-                index: _currentIndex,
-                children: _pages,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.6),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, -2),
-                      ),
-                    ],
-                  ),
-                  child: SafeArea(
-                    top: false,
-                    // bottom: false,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildNavItem(0, CupertinoIcons.game_controller, '界面'),
-                        _buildNavItem(1, CupertinoIcons.bus, '功能'),
-                        _buildNavItem(2, CupertinoIcons.person, '我的'),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+  static HomePageTab fromString(String value) {
+    return HomePageTab.values.firstWhere(
+      (tab) => tab.name == value,
+      orElse: () => HomePageTab.ui,
     );
   }
+}
 
-  Widget _buildNavItem(int index, IconData icon, String label) {
-    final isSelected = _currentIndex == index;
-    final color = isSelected
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.onSurface;
+class HomePage extends HookConsumerWidget {
+  const HomePage({
+    super.key,
+    this.initialTab = HomePageTab.ui,
+  });
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        setState(() => _currentIndex = index);
-      },
-      child: Container(
-        height: 56,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color),
-            const SizedBox(height: 4),
-            Text(
+  final HomePageTab initialTab;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pages = const [
+      UiPage(),
+      FunPage(),
+      MinePage(),
+    ];
+
+    final currentIndex = useState(initialTab.index);
+
+    final mediaQueryData = MediaQuery.of(context);
+    final bottomBarHeight =
+        mediaQueryData.padding.bottom + AppDefine.kMyNavBarHeight;
+
+    Widget buildTextNavItem(int index, String label) {
+      final isSelected = currentIndex.value == index;
+      final color = isSelected ? Colors.black : Colors.grey;
+
+      return GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => currentIndex.value = index,
+        child: Container(
+          height: 56,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Center(
+            child: Text(
               label,
               style: TextStyle(
                 color: color,
-                fontSize: 12,
+                fontSize: 16,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness:
+              Platform.isAndroid ? Brightness.dark : Brightness.light,
+          statusBarIconBrightness:
+              Platform.isAndroid ? Brightness.dark : Brightness.light,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
+          systemNavigationBarContrastEnforced: false,
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: MediaQuery(
+                data: mediaQueryData.copyWith(
+                  padding: mediaQueryData.padding.copyWith(
+                    bottom: mediaQueryData.viewInsets.bottom > 0
+                        ? 0
+                        : bottomBarHeight,
+                  ),
+                ),
+                child: IndexedStack(
+                  index: currentIndex.value,
+                  children: pages,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                  child: Column(
+                    children: [
+                      LineWidget(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 8,
+                              offset: const Offset(0, -2),
+                            ),
+                          ],
+                        ),
+                        child: SafeArea(
+                          top: false,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              buildTextNavItem(0, 'UI'),
+                              buildTextNavItem(1, '功能'),
+                              buildTextNavItem(2, '我的'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

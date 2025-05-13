@@ -53,9 +53,14 @@ class AppUser extends _$AppUser {
   Future<void> refresh() async {
     if (state == null) return;
     try {
-      var user = (await getIt<ApiClient>().getCurrentUser()).data!;
-      user = user.copyWith(accessToken: state!.accessToken);
-      save(user);
+      var userProfile = (await getIt<ApiClient>().getCurrentUser()).data!;
+      final appUserModel = state?.copyWith(
+        username: userProfile.username,
+        avatar: userProfile.avatar,
+        phone: userProfile.phone,
+        userType: userProfile.userType,
+      );
+      save(appUserModel);
       getIt<EventBus>().fire(UserUpdatedEvent());
     } catch (e) {
       log('刷新用户信息错误:$e time: ${DateTime.now()}', name: 'user');

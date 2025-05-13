@@ -19,7 +19,7 @@ class AppBarBackButton extends StatelessWidget {
         minSize: 0,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SvgPicture.asset(
-          Assets.svg.iconArrowdown,
+          Assets.svg.iconDown,
           width: 24,
           height: 24,
           colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
@@ -29,7 +29,7 @@ class AppBarBackButton extends StatelessWidget {
     return CupertinoButton(
       padding: EdgeInsets.zero,
       child: SvgPicture.asset(
-        Assets.svg.iconNavback,
+        Assets.svg.iconBack,
         width: 20,
         height: 20,
         colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),

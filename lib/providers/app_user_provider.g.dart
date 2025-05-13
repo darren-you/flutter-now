@@ -22,7 +22,7 @@ final isLoggedProvider = Provider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef IsLoggedRef = ProviderRef<bool>;
-String _$appUserHash() => r'aeebc6d4427b4e28c144226cf56b3ba4eafef170';
+String _$appUserHash() => r'97424513e9dbf1cb591ea84174610cd9869b1bd7';
 
 /// See also [AppUser].
 @ProviderFor(AppUser)

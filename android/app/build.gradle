@@ -5,18 +5,9 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-// 加载 local.properties
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
 android {
     namespace = "cn.darrenyou.flutternow"
-    compileSdk = localProperties.getProperty('flutter.compileSdkVersion').toInteger()
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -33,10 +24,11 @@ android {
         applicationId = "cn.darrenyou.flutternow"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = localProperties.getProperty('flutter.minSdkVersion').toInteger()
-        targetSdk = localProperties.getProperty('flutter.targetSdkVersion').toInteger()
-        versionCode = localProperties.getProperty('flutter.versionCode')
-        versionName = localProperties.getProperty('flutter.versionName')
+        // minSdk = flutter.minSdkVersion
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
 
         multiDexEnabled true
         manifestPlaceholders = [

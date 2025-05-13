@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutternow/app.dart';
 import 'package:flutternow/constants/prefrences_keys.dart';
-import 'package:flutternow/enums/enums.dart';
+import 'package:flutternow/enums/custom_exception_type.dart';
 import 'package:flutternow/eventbus/event_bus.dart';
 import 'package:flutternow/managers/preferences_manager.dart';
 import 'package:flutternow/models/app_info_model.dart';
@@ -92,17 +92,17 @@ class RequestInterceptor extends Interceptor {
     }
 
     /// 业务数据为空
-    if (response.data['code'] == 200 && response.data['data'] == null) {
-      handler.reject(
-        DioException(
-          requestOptions: response.requestOptions,
-          message: '业务数据为空',
-          response: response,
-        ),
-        true,
-      );
-      return;
-    }
+    // if (response.data['code'] == 200 && response.data['data'] == null) {
+    //   handler.reject(
+    //     DioException(
+    //       requestOptions: response.requestOptions,
+    //       message: '业务数据为空',
+    //       response: response,
+    //     ),
+    //     true,
+    //   );
+    //   return;
+    // }
 
     if (response.data["code"] == 200) {
       handler.next(response); // 继续传递响应

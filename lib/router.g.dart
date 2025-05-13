@@ -10,6 +10,8 @@ List<RouteBase> get $appRoutes => [
       $appProtocolRoute,
       $mainRoute,
       $accoutLoginRoute,
+      $userProfileRoute,
+      $settingRoute,
     ];
 
 RouteBase get $appProtocolRoute => GoRouteData.$route(
@@ -36,15 +38,17 @@ extension $AppProtocolRouteExtension on AppProtocolRoute {
 }
 
 RouteBase get $mainRoute => GoRouteData.$route(
-      path: '/home',
+      path: '/home/:tab',
       factory: $MainRouteExtension._fromState,
     );
 
 extension $MainRouteExtension on MainRoute {
-  static MainRoute _fromState(GoRouterState state) => const MainRoute();
+  static MainRoute _fromState(GoRouterState state) => MainRoute(
+        tab: state.pathParameters['tab']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/home',
+        '/home/${Uri.encodeComponent(tab)}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -68,6 +72,51 @@ extension $AccoutLoginRouteExtension on AccoutLoginRoute {
 
   String get location => GoRouteData.$location(
         '/accout',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $userProfileRoute => GoRouteData.$route(
+      path: '/profile',
+      factory: $UserProfileRouteExtension._fromState,
+    );
+
+extension $UserProfileRouteExtension on UserProfileRoute {
+  static UserProfileRoute _fromState(GoRouterState state) =>
+      const UserProfileRoute();
+
+  String get location => GoRouteData.$location(
+        '/profile',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $settingRoute => GoRouteData.$route(
+      path: '/setting',
+      factory: $SettingRouteExtension._fromState,
+    );
+
+extension $SettingRouteExtension on SettingRoute {
+  static SettingRoute _fromState(GoRouterState state) => const SettingRoute();
+
+  String get location => GoRouteData.$location(
+        '/setting',
       );
 
   void go(BuildContext context) => context.go(location);

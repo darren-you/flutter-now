@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutternow/debug_panel_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutternow/app.dart';
 import 'package:flutternow/providers/router_provider.dart';
@@ -62,7 +63,18 @@ class MainApp extends ConsumerWidget {
           Toast 管理器
           动画支持等
          */
+        // child = botToastBuilder(context, child);
+        // return child;
+
         child = botToastBuilder(context, child);
+        if (const bool.fromEnvironment('dart.vm.product') == false) {
+          return Stack(
+            children: [
+              child,
+              const DraggableDebugPanel(),
+            ],
+          );
+        }
         return child;
       },
     );

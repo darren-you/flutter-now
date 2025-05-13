@@ -1,98 +1,74 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flutternow/extensions/fontweight_ext.dart';
+import 'package:flutternow/base/widgets/app_bar_back_button.dart';
+import 'package:flutternow/constants/app_define.dart';
 import 'package:flutternow/theme.dart';
-
-import 'app_bar_back_button.dart';
 
 class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MAppBar({
     super.key,
-    this.title,
-    this.titleWidget,
-    this.leading,
-    this.leadingWidth,
-    this.actions,
-    this.backgroundColor,
+    this.child,
+    this.backgroundColor = Colors.transparent,
     this.systemOverlayStyle,
-    this.overlay,
-    this.enabledBackdrop = true,
+    this.enabledBack = true,
+    this.enabledBackdrop = false,
   });
 
-  final String? title;
-  final Widget? titleWidget;
-  final Widget? leading;
-  final double? leadingWidth;
-  final List<Widget>? actions;
+  final Widget? child;
   final Color? backgroundColor;
   final SystemUiOverlayStyle? systemOverlayStyle;
-  final Widget? overlay;
+  final bool enabledBack;
   final bool enabledBackdrop;
 
   @override
   Widget build(BuildContext context) {
-    Widget child = AnnotatedRegion<SystemUiOverlayStyle>(
+    Widget appBar = AnnotatedRegion<SystemUiOverlayStyle>(
       value: systemOverlayStyle ?? kSystemUiOverlayStyle,
       child: Container(
         color: backgroundColor ?? context.appColors.appBar,
         child: SafeArea(
           bottom: false,
           child: Container(
-            height: 55,
+            height: AppDefine.kMyToolBarHeight,
             alignment: Alignment.center,
-            child: NavigationToolbar(
-              leading: leading ?? _buildLeading(context),
-              trailing: actions != null
-                  ? Row(mainAxisSize: MainAxisSize.min, children: actions!)
-                  : null,
-              middle: titleWidget ??
-                  Text(
-                    title ?? '',
-                    style: TextStyle(
-                      fontSize: 21,
-                      fontWeight: FontWeightExt.medium,
-                    ),
-                  ),
-            ),
+            child: _buildAppBar(context, child),
           ),
         ),
       ),
     );
 
-    if (overlay != null) {
-      child = Stack(
-        children: [
-          child,
-          Positioned.fill(child: overlay!),
-        ],
-      );
-    }
-
     if (enabledBackdrop) {
-      child = ClipRect(
+      appBar = ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-          child: child,
+          child: appBar,
         ),
       );
     }
 
-    return child;
+    return appBar;
   }
 
-  Widget? _buildLeading(BuildContext context) {
-    if (leading != null) return leading;
+  Widget? _buildAppBar(BuildContext context, Widget? child) {
     final route = ModalRoute.of(context);
-    if (route is PageRoute && (route.canPop || route.fullscreenDialog)) {
-      return AppBarBackButton(fullscreen: route.fullscreenDialog);
-    }
-    return null;
+    final typeFullScreenDialog = route is PageRoute && route.fullscreenDialog;
+    return Stack(
+      children: [
+        if (enabledBack)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: AppBarBackButton(fullscreen: typeFullScreenDialog),
+          ),
+        Align(
+          alignment: Alignment.center,
+          child: child ?? const SizedBox(),
+        ),
+      ],
+    );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(55);
+  Size get preferredSize => const Size.fromHeight(AppDefine.kMyToolBarHeight);
 }

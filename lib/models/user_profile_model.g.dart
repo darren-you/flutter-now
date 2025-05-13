@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_user_model.dart';
+part of 'user_profile_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,8 +8,6 @@ part of 'app_user_model.dart';
 
 _$AppUserModelImpl _$$AppUserModelImplFromJson(Map<String, dynamic> json) =>
     _$AppUserModelImpl(
-      accessToken: json['access_token'] as String? ?? '',
-      id: json['id'] as String? ?? '',
       username: json['username'] as String? ?? '',
       avatar: json['avatar'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
@@ -18,8 +16,6 @@ _$AppUserModelImpl _$$AppUserModelImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$AppUserModelImplToJson(_$AppUserModelImpl instance) =>
     <String, dynamic>{
-      'access_token': instance.accessToken,
-      'id': instance.id,
       'username': instance.username,
       'avatar': instance.avatar,
       'phone': instance.phone,

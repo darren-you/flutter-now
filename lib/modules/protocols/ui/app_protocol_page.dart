@@ -20,7 +20,7 @@ class AppProtocolPage extends HookConsumerWidget {
   Future<void> _agreeProtocol(BuildContext context) async {
     ProtocolManager.instance.setAgreedAppProtocol();
     await initApp();
-    if (context.mounted) MainRoute().go(context);
+    if (context.mounted) MainRoute(tab: 'foods').go(context);
   }
 
   @override
