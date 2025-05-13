@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// 本地轻量存储
 /// 基于shared_preferences
 class PreferencesManager {
-  static final String _tag = 'LocalStorageManager';
+  static final String _tag = 'PreferencesManager';
   PreferencesManager._();
 
   static PreferencesManager? _instance;

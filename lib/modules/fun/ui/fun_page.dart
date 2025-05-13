@@ -41,7 +41,7 @@ class FunPage extends ConsumerWidget {
         title: '清除隐私协议状态',
         onClick: () {
           ProtocolManager.instance.removeAgreedAppProtocol();
-          BotToast.showText(text: '清除成功✅');
+          BotToast.showText(text: '清除成功✅ 22222');
         },
       ),
       LineSpacerWidget(),

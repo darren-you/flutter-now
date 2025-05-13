@@ -28,7 +28,7 @@ bool isFontWeigthSupportW500 = false;
 
 /// 初始化基础框架
 ///
-/// 1、Flutter从屏幕编译开始绘制
+/// 1、Flutter从屏幕边缘开始绘制
 /// 2、SharePreference初始化
 /// 3、网络代理初始化
 /// 4、EventBus单例依赖注入

@@ -104,7 +104,7 @@ Widget appInfoWidget() {
       ),
       const Padding(padding: EdgeInsets.only(bottom: 4)),
       Text(
-        'Version 1.0.0',
+        'version 1.0.0',
         style: TextStyle(color: Colors.grey, fontSize: 17),
       ),
       const Padding(padding: EdgeInsets.only(bottom: 20)),
