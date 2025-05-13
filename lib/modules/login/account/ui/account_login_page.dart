@@ -102,7 +102,7 @@ class AccountLoginPage extends HookConsumerWidget {
                   height: 40,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(

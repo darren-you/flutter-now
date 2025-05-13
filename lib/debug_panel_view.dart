@@ -94,6 +94,11 @@ class _DraggableDebugPanelState extends ConsumerState<DraggableDebugPanel> {
                 onPressed: () => router.push('/markets'),
                 child: const Text('应用市场测试'),
               ),
+              const Padding(padding: EdgeInsets.only(bottom: 16)),
+              ElevatedButton(
+                onPressed: () => router.push('/test'),
+                child: const Text('测试Page'),
+              ),
             ],
           ),
         ),

@@ -12,6 +12,7 @@ List<RouteBase> get $appRoutes => [
       $accoutLoginRoute,
       $userProfileRoute,
       $settingRoute,
+      $tesRoute,
     ];
 
 RouteBase get $appProtocolRoute => GoRouteData.$route(
@@ -117,6 +118,28 @@ extension $SettingRouteExtension on SettingRoute {
 
   String get location => GoRouteData.$location(
         '/setting',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $tesRoute => GoRouteData.$route(
+      path: '/test',
+      factory: $TesRouteExtension._fromState,
+    );
+
+extension $TesRouteExtension on TesRoute {
+  static TesRoute _fromState(GoRouterState state) => const TesRoute();
+
+  String get location => GoRouteData.$location(
+        '/test',
       );
 
   void go(BuildContext context) => context.go(location);

@@ -17,6 +17,7 @@ class MinePage extends ConsumerWidget {
     final mediaQueryData = MediaQuery.of(context);
     var statusBarHeight = mediaQueryData.padding.top;
     final appUserNotifier = ref.watch(appUserProvider);
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {

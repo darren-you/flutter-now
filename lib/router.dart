@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutternow/managers/protocol_manager.dart';
 import 'package:flutternow/modules/home/ui/home_page.dart';
 import 'package:flutternow/modules/login/login.dart';
 import 'package:flutternow/modules/setting/ui/setting_page.dart';
+import 'package:flutternow/modules/test/test.dart';
 import 'package:flutternow/providers/app_user_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutternow/modules/protocols/ui/app_protocol_page.dart';
@@ -81,9 +83,11 @@ class UserProfileRoute extends GoRouteData {
     );
   }
 
+  // 页面重定向函数
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
     if (!ProviderContainer().read(isLoggedProvider)) {
+      log('用户未登陆 -> 去登陆');
       return AccoutLoginRoute().location;
     }
     return null;
@@ -99,6 +103,19 @@ class SettingRoute extends GoRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return const CupertinoPage(
       child: SettingPage(),
+    );
+  }
+}
+
+/// 测试界面
+@TypedGoRoute<TesRoute>(path: '/test')
+class TesRoute extends GoRouteData {
+  const TesRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return const CupertinoPage(
+      child: TestPage(),
     );
   }
 }
